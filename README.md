@@ -2,7 +2,6 @@
 Scripts for running OSKAR on EoR data with LOFAR and SKA telescope models.
 The OSKAR documentation can be found here: http://www.oerc.ox.ac.uk/~ska/oskar2/
 
-
 ## Telescope Models  
 Coordinates and layouts all use the latest SKA1-LOW Configuration Coordinates (https://astronomers.skatelescope.org/wp-content/uploads/2016/09/SKA-TEL-SKO-0000422_02_SKA1_LowConfigurationCoordinates-1.pdf) as a basis for Revision 2 coordinates. Revision 3 coordinates came from private correspondance and will be likely published shortly.
 
@@ -10,4 +9,7 @@ Coordinates and layouts all use the latest SKA1-LOW Configuration Coordinates (h
 - SKA_central_area*.tm (stations within a central diameter of 3400m)
 - SKA_all_stations*.tm (all stations in the full 65km SKA layout)
 
+## OSKAR settings script
+- OSKAR_example_settings_script.py
+  Example settings script for OSKAR. Originally written by Fred Dulwich and Benjamin Mort with later additions made by Emma Chapman. This can be used as part of a submission script or as a guide for using the GUI.
 
