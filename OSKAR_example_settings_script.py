@@ -301,12 +301,12 @@ def evaluate_noise_rms_Jy(freqHz, bw, obs_length):
     SEFD_station *= 1e26 # Convert to Jy
     sigma_pq = SEFD_station / np.sqrt(2.0 * bw * obs_length)
 
-     print 'Noise:'
-     print '- Frequency          = %.1f MHz (wavelength = %.1f m)' % (freqHz/1.e6, lambda_)
-     print '- Tsys               = %.1f K' % (T_sys)
-     print '- SEFD (station)     = %.1f kJy' % (SEFD_station*1e-3)
-     print '- Observation length = %.1f hours' % (obs_length / 3600.0)
-     print '- sigma_pq           = %.1f mJy' % (sigma_pq*1e3)
+    print 'Noise:'
+    print '- Frequency          = %.1f MHz (wavelength = %.1f m)' % (freqHz/1.e6, lambda_)
+    print '- Tsys               = %.1f K' % (T_sys)
+    print '- SEFD (station)     = %.1f kJy' % (SEFD_station*1e-3)
+    print '- Observation length = %.1f hours' % (obs_length / 3600.0)
+    print '- sigma_pq           = %.1f mJy' % (sigma_pq*1e3)
 
     return sigma_pq
 
@@ -393,17 +393,17 @@ if __name__ == '__main__':
     import os
     import numpy as np
 
-    freq = 160.0 #MHz 	
+    freq = 73.3 #MHz 	
     generate_data = 1
     run_sim = 1
     mode = 1  #[input data: 1 = diffuse simulation slice, 2 = OSM, 3 = none (noise will be simulated)]
-    sky_root_name = 'slice_filename' # It is expected that slice names will be in the format 'slice_filename_100.000MHz.fits'
+    sky_root_name = 'obs_units_lc_HMXB-QSOs_lownu_68.8_dnu_0.1_res_512x512_FOV_5deg_zeromean_K_073.300MHz' # 'slice_filename' It is expected that slice names will be in the format 'slice_filename_100.000MHz.fits' For noise, just type desired filename e.g. 'noise_160.000MHz'
     # Sky model data.
     fov_deg  = 5.0
-    num_pixels_side = 1024
-    field = EOR0
+    num_pixels_side = 512
+    field = 'EOR0'
     telescope = 'SKA'
-    telescope_model = 'SKA_core_area.tm'
+    telescope_model = 'SKA_core_area'
     max_bl = 1000
 
     if (field == 'EOR0'):
@@ -452,7 +452,8 @@ if __name__ == '__main__':
         noise_rms_Jy = evaluate_noise_rms_Jy(freqHz, noise_bw, noise_obs_length)
 
         # Create settings file.
-        noise_seed = np.random.seed()
+        noise_seed = 'time'
+        print noise_seed
         s = create_settings(freqHz, osm_filename, ra0_deg, dec0_deg,
             ms_name, start_time, obs_length, num_time_steps, uvmax,
             add_noise, noise_rms_Jy, noise_seed, telescope, telescope_model)
@@ -460,3 +461,4 @@ if __name__ == '__main__':
         print 'Running simulation for freq = %.4f MHz' % \
                 (freqHz/1.0e6)
         run_interferometer(ini)
+
